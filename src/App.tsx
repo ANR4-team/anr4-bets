@@ -1,19 +1,22 @@
-import logo from './logo.svg'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
-import s from './App.module.scss'
+import { Routes } from 'modules/routing'
+import { Dashboard } from 'pages/dashboard'
+import { Tournament } from 'pages/tournament'
 
 export const App = (): JSX.Element => {
   return (
-    <div className={s.app}>
-      <header className={s.header}>
-        <img src={logo} className={s.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className={s.link} href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path={Routes.dashboard}>
+          <Dashboard />
+        </Route>
+        <Route path={Routes.tournament}>
+          <Tournament />
+        </Route>
+
+        <Redirect to={Routes.dashboard} />
+      </Switch>
+    </BrowserRouter>
   )
 }
