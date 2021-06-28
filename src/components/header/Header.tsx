@@ -2,15 +2,17 @@ import { FC } from 'react'
 import { Button } from 'primereact/button'
 import { PrimeIcons } from 'primereact/api'
 
+import { User } from 'api/user'
+
 import s from './Header.module.scss'
 
 interface Props {
-  signIn: () => void
+  login: () => void
   logout: () => void
-  authenticated: boolean
+  user: User | null
 }
 
-export const Header: FC<Props> = ({ signIn, logout, authenticated }) => {
+export const Header: FC<Props> = ({ login, logout, user }) => {
   return (
     <header className={s.header}>
       <img
@@ -19,10 +21,10 @@ export const Header: FC<Props> = ({ signIn, logout, authenticated }) => {
         alt="app-logo"
       />
       <div>
-        {authenticated ? (
+        {user ? (
           <Button label="Logout" onClick={logout} />
         ) : (
-          <Button label="Sign In" icon={PrimeIcons.GOOGLE} onClick={signIn} />
+          <Button label="Sign In" icon={PrimeIcons.GOOGLE} onClick={login} />
         )}
       </div>
     </header>
